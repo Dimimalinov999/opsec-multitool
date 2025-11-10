@@ -20,6 +20,9 @@ opsec decrypt aes256 [insert base64 phrase in quotes] [insert passkey in quotes]
 ```
 ### Cleaning EXIF data
 if you have taken an image with your smartphone or digital camera, it leaves insecure info such as GPS location data and much more sensitive info. To clean the sensitive metadata and **preserve** technical data such as ISO, shutter speed, aperture etc. Use the following command:
+
+**Tip:**
+You can drag and drop the image in the terminal to fill the image path.
 ``` bash
 opsec exif clean [image path]
 ```
@@ -28,8 +31,6 @@ If you want to fully wipe the exif data for privacy reasons, use the following c
 ``` bash
 opsec exif wipe [image path]
 ```
-#### Tip:
-You can drag and drop the image in the terminal to fill the image path.
 ## Installing (UNIX like systems)
 ### Pre-compiled binaries
 You can obtain the pre-compiled binaries in the releases tab
