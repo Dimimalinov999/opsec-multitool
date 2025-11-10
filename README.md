@@ -1,4 +1,9 @@
 # Opsec (yes really) multi-tool
+Now you can truly
+```
+sudo apt install opsec
+```
+
 (Quick note: im not really into cybersecurity)
 ###
 The opsec multi-tool is a tool designed for staying private on the internet with the following features:
