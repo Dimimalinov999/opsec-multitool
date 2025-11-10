@@ -26,6 +26,7 @@ void help() { // help text
 }
 
 int main(int argc, char *argv[]) {
+    
     if (argc < 2) {
         std::cerr << "Missing command\n";
         help();
