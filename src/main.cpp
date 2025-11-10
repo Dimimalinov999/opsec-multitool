@@ -7,10 +7,10 @@
 #include <openssl/buffer.h>
 
 #include "aes/crypto.h"
+#include "exif/exif_clean.h"
 
 #include <cstdlib>
 #include <ostream>
-#include <vector>
 #include <cstring>
 #include <string>
 #include <iostream>
@@ -33,18 +33,30 @@ int main(int argc, char *argv[]) {
 
     std::string cmd = argv[1];
 
-    if (cmd == "encrypt" && argc >= 5) {
+    if (cmd == "encrypt" && strcmp(argv[2], "aes256") == 0 && argc >= 5) {
         std::string text = argv[3];
         std::string pass = argv[4];
         std::string b64 = encrypt_aes256_base64(text, pass);
         std::cout << "Base64 encrypted: " << b64 << std::endl;
 
-    } else if (cmd == "decrypt" && argc >= 5) {
+    } else if (cmd == "decrypt" && strcmp(argv[2], "aes256") == 0 && argc >= 5) {
         std::string b64 = argv[3];
         std::string pass = argv[4];
         std::string decrypted = decrypt_aes256_base64(b64, pass);
         std::cout << "Decrypted text: " << decrypted << std::endl;
 
+    } else if (cmd == "exif" && argc >= 3) {
+        if (strcmp(argv[2], "wipe") == 0) {
+            std::string img_path = argv[3];
+            exif_wipe(img_path);
+        }
+        if (strcmp(argv[2], "clean") == 0) {
+            std::string img_path = argv[3];
+            exif_clean(img_path);
+        }
+
+
+    
     } else {
         std::cerr << "Unknown or missing command\n";
         help();
