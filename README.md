@@ -34,6 +34,27 @@ You can drag and drop the image in the terminal to fill the image path.
 ### Pre-compiled binaries
 You can obtain the pre-compiled binaries in the releases tab
 ### Self compilation
+#### Dependencies
+Sadly this software isn't dependency-less, so in order to compile the code yourself, you are gonna need the following dependencies:
+- OpenSSL (for encryption)
+- EXIV2 (for exif tools)
+
+installing them:
+
+(**NOTE:** you should install these even if you aren't compiling, just in case)
+- **Debian based distros**
+``` bash
+apt-get install openssl libssl-dev libexiv2-dev exiv2
+```
+- **RPM based distros**
+``` bash
+dnf install openssl openssl-devel exiv2 exiv2-devel
+```
+- **Arch based distros**
+```bash
+pacman -S openssl exiv2
+```
+#### Actual compilation
 You can compile the code yourself by running
 ``` bash
 make
