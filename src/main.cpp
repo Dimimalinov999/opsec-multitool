@@ -8,6 +8,7 @@
 
 #include "aes/crypto.h"
 #include "exif/exif_clean.h"
+#include "safedel/safedel.h"
 
 #include <cstdlib>
 #include <ostream>
@@ -57,6 +58,14 @@ int main(int argc, char *argv[]) {
 
 
     
+    } else if ((cmd == "del" || cmd == "delete") && argc >= 2) {
+        std::string del_path = argv[2];
+        // failsave, to avoid the user from wiping his main filesystem xD
+        if (del_path == "/") {
+            std::cout << "You shouldn't wipe your root filesystem. Aborting.\n";
+        } else {
+            safedelete(del_path);
+        }
     } else {
         std::cerr << "Unknown or missing command\n";
         help();

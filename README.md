@@ -10,6 +10,7 @@ The opsec multi-tool is a tool designed for staying private on the internet with
 - AES256 encrypted messages
 - Decrypting AES256 messages
 - EXIF clean and wipe
+- Securely erasing files from file system
 
 and more coming soon...
 ## Usage
@@ -35,6 +36,11 @@ opsec exif clean [image path]
 If you want to fully wipe the exif data for privacy reasons, use the following command:
 ``` bash
 opsec exif wipe [image path]
+```
+### Safely deleting files
+In order to prevent your sensitive files from being scraped from your disk using undeletion software, you can inject the file with zeros before deleting. You can do that with the following command:
+```bash
+opsec delete [file path]
 ```
 ## Installing (UNIX like systems)
 ### Pre-compiled binaries
