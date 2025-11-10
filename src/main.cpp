@@ -18,10 +18,10 @@
 
 void help() { // help text
     std::cout << "Usage:" << std::endl;
-    std::cout << "Use the opsec command follwed by an argument, for example:" << std::endl;
+    std::cout << "-Use the opsec command follwed by an argument, for example:" << std::endl;
     std::cout << "opsec encrypt aes256 [plain text message in quotes] [encryption key in quotes]" << std::endl;
-    std::cout << "for encryption use opsec encrypt aes256..." << std::endl;
-    std::cout << "for decryption use opsec decrypt aes256..." << std::endl;
+    std::cout << "-for encryption use opsec encrypt aes256..." << std::endl;
+    std::cout << "-for decryption use opsec decrypt aes256..." << std::endl;
 
 }
 
@@ -56,8 +56,6 @@ int main(int argc, char *argv[]) {
             exif_clean(img_path);
         }
 
-
-    
     } else if ((cmd == "del" || cmd == "delete") && argc >= 2) {
         std::string del_path = argv[2];
         // failsave, to avoid the user from wiping his main filesystem xD
@@ -66,6 +64,7 @@ int main(int argc, char *argv[]) {
         } else {
             safedelete(del_path);
         }
+
     } else {
         std::cerr << "Unknown or missing command\n";
         help();
