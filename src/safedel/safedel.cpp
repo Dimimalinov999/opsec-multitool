@@ -2,11 +2,14 @@
 #include <fstream>
 #include <vector>
 #include <filesystem>
+#include "../main_header.h"
 
 void safedelete(const std::string& del_path) {
     // failsave 2, to (once again) avoid the user from wiping his main filesystem xD
-    if (del_path == "/") {
-        std::cout << "You shouldn't wipe your root filesystem. Aborting.\n";
+    std::string UnsafePaths[] = {"/", "/boot", "/etc", "/lib", "/lib64", "/bin", "/usr", "/var", "/home", "/root", "/opt", "/proc"};
+    int size = sizeof(UnsafePaths) / sizeof(UnsafePaths[0]);
+    if (containsElement(UnsafePaths, size, del_path)) {
+        std::cout << "You shouldn't wipe this directory. Aborting.\n";
     } else {
         if (!std::filesystem::exists(del_path)) {
             std::cerr << "File doesn't exist.\n";
@@ -15,7 +18,7 @@ void safedelete(const std::string& del_path) {
 
         // finding file size
         std::uintmax_t file_size = std::filesystem::file_size(del_path);
-        std::cout << "file size is " << file_size << " bytes\n";
+        // std::cout << "file size is " << file_size << " bytes\n"; // this is if you want to debug
 
         std::fstream file(del_path, std::ios::in | std::ios::out | std::ios::binary);
         if (!file.is_open()) {

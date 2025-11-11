@@ -9,6 +9,7 @@
 #include "aes/crypto.h"
 #include "exif/exif_clean.h"
 #include "safedel/safedel.h"
+#include "main_header.h"
 
 #include <cstdlib>
 #include <ostream>
@@ -26,7 +27,7 @@ void help() { // help text
 }
 
 int main(int argc, char *argv[]) {
-    
+
     if (argc < 2) {
         std::cerr << "Missing command\n";
         help();
@@ -59,11 +60,15 @@ int main(int argc, char *argv[]) {
 
     } else if ((cmd == "del" || cmd == "delete") && argc >= 2) {
         std::string del_path = argv[2];
+        std::string UnsafePaths[] = {"/", "/boot", "/etc", "/lib", "/lib64", "/bin", "/usr", "/var", "/home", "/root", "/opt", "/proc"};
+        int size = sizeof(UnsafePaths) / sizeof(UnsafePaths[0]);
+
         // failsave, to avoid the user from wiping his main filesystem xD
-        if (del_path == "/") {
-            std::cout << "You shouldn't wipe your root filesystem. Aborting.\n";
+        if (containsElement(UnsafePaths, size, del_path)) {
+            std::cout << "You shouldn't wipe this directory. Aborting.\n";
         } else {
             safedelete(del_path);
+            // std::cout << "you just deleted " << del_path << "\n"; // this is for debugging purposes
         }
 
     } else {
