@@ -71,6 +71,27 @@ int main(int argc, char *argv[]) {
             // std::cout << "you just deleted " << del_path << "\n"; // this is for debugging purposes
         }
 
+    /* // TODO: fix this shit.
+    } else if (cmd == "encrypt" && strcmp(argv[2], "file") == 0 && argc >= 3) {
+
+        std::string baseFile = argv[2];
+        std::string pass = argv[3];
+        std::string baseFileOutput = argv[4];
+        if (baseFileOutput == "") {
+            baseFileOutput = baseFile + ".encrypted";
+        }
+        encrypt_file_aes256(baseFile, baseFileOutput, pass);
+        
+    } else if (cmd == "decrypt" && strcmp(argv[2], "file") == 0 && argc >= 3) {
+
+        std::string baseFile = argv[2];
+        std::string pass = argv[3];
+        std::string baseFileOutput = argv[4]; // output as in the decrypted file :)
+        if (baseFileOutput == "") {
+
+        }
+        decrypt_file_aes256(baseFile, baseFileOutput, pass);
+    */
     } else {
         std::cerr << "Unknown or missing command\n";
         help();
