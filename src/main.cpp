@@ -17,12 +17,33 @@
 #include <string>
 #include <iostream>
 
-void help() { // help text
-    std::cout << "Usage:" << std::endl;
-    std::cout << "-Use the opsec command follwed by an argument, for example:" << std::endl;
-    std::cout << "opsec encrypt aes256 [plain text message in quotes] [encryption key in quotes]" << std::endl;
-    std::cout << "-for encryption use opsec encrypt aes256..." << std::endl;
-    std::cout << "-for decryption use opsec decrypt aes256..." << std::endl;
+void help(int whatHelp) { // help text
+    if (whatHelp == 1) {
+      std::cout << "Help:\n";
+      std::cout << "\e[1mbold" << "Encrypting:" << "\e[0m" << std::endl;
+      std::cout << std::endl;
+      std::cout << "opsec encrypt [plain text in quotes] [encryption key in quotes]\n";
+      std::cout << "\e[1mbold" << "Decrypting:" << "\e[0m" << std::endl;
+      std::cout << std::endl;
+      std::cout << "opsec decrypt [plain text in quotes] [encryption key in quotes]\n";
+      std::cout << "\e[1mbold" << "EXIF tools:" << "\e[0m" << std::endl;
+      std::cout << std::endl;
+      std::cout << "opsec exif clean [file path]\n" << "or\n";
+      std::cout << "opsec exif wipe [file path]\n";
+      std::cout << "Note: clean removes only sensitive metadata, while wipe removes all exif metadata.\n";
+      std::cout << "\e[1mbold" << "SafeDelete:" << "\e[0m" << std::endl;
+
+
+
+      
+    }
+    else {
+      std::cout << "Usage:" << std::endl;
+      std::cout << "-Use the opsec command follwed by an argument, for example:" << std::endl;
+      std::cout << "opsec encrypt [plain text message in quotes] [encryption key in quotes]" << std::endl;
+      std::cout << "-for encryption use opsec encrypt ..." << std::endl;
+      std::cout << "-for decryption use opsec decrypt ..." << std::endl;
+    }
 
 }
 
@@ -30,23 +51,27 @@ int main(int argc, char *argv[]) {
 
     if (argc < 2) {
         std::cerr << "Missing command\n";
-        help();
+        help(0);
         return 1;
     }
 
     std::string cmd = argv[1];
 
-    if (cmd == "encrypt" && strcmp(argv[2], "aes256") == 0 && argc >= 5) {
-        std::string text = argv[3];
-        std::string pass = argv[4];
+    if ((cmd == "encrypt" || cmd == "enc") && argc >= 4) {
+        std::string text = argv[2];
+        std::string pass = argv[3];
         std::string b64 = encrypt_aes256_base64(text, pass);
         std::cout << "Base64 encrypted: " << b64 << std::endl;
 
-    } else if (cmd == "decrypt" && strcmp(argv[2], "aes256") == 0 && argc >= 5) {
-        std::string b64 = argv[3];
-        std::string pass = argv[4];
+    } else if ((cmd == "decrypt" || cmd == "dec") && argc >= 4) {
+        std::string b64 = argv[2];
+        std::string pass = argv[3];
         std::string decrypted = decrypt_aes256_base64(b64, pass);
         std::cout << "Decrypted text: " << decrypted << std::endl;
+
+    } else if (cmd == "help" && argc >= 1) {
+      
+      help(1);
 
     } else if (cmd == "exif" && argc >= 3) {
         if (strcmp(argv[2], "wipe") == 0) {
@@ -94,7 +119,7 @@ int main(int argc, char *argv[]) {
     */
     } else {
         std::cerr << "Unknown or missing command\n";
-        help();
+        help(0);
         return 1;
     }
 

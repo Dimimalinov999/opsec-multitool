@@ -30,7 +30,7 @@ A huge portion of the inspiration for this project goes to <a href="https://gith
 Encrypting messages is crutial when using a non-secured messaging platform. You can encrypt messages in using the following command:
 
 ``` bash
-opsec encrypt aes256 [insert message in quotes] [insert passkey in quotes]
+opsec encrypt [insert message in quotes] [insert passkey in quotes]
 ```
 
 ### Decrypting
@@ -38,7 +38,7 @@ opsec encrypt aes256 [insert message in quotes] [insert passkey in quotes]
 If your *partner in crime* has sent you a decrypted message, you can decrypt it like so:
 
 ``` bash
-opsec decrypt aes256 [insert base64 phrase in quotes] [insert passkey in quotes]
+opsec decrypt [insert base64 phrase in quotes] [insert passkey in quotes]
 ```
 
 ### Cleaning EXIF data
@@ -103,6 +103,11 @@ dnf install openssl openssl-devel exiv2 exiv2-devel
 
 ```bash
 pacman -S openssl exiv2
+```
+
+- **MacOS**
+```
+brew install openssl exiv2
 ```
 
 #### Actual compilation

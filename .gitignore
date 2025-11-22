@@ -1,0 +1,9 @@
+./output
+./src/*.d
+./src/*.o
+./src/aes/*.o
+./src/aes/*.d
+./src/exif/*.o
+./src/exif/*.d
+./src/safedel/*.o
+./src/safedel/*.d
